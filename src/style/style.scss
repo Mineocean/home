@@ -80,7 +80,9 @@ a:hover {
   --el-message-bg-color: var(--el-message-bg) !important;
   --el-message-text-color: var(--el-message-text) !important;
   --el-message-border-color: var(--border-color) !important;
-  border-radius: 8px !important;
+  border-radius: 999px !important;
+  padding: 10px 24px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4) !important;
 
   .el-message__badge { display: none; }
   .el-message__content { white-space: nowrap; }
