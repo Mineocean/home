@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="public/images/icon/logo.png" alt="Logo" width="120" style="border-radius: 16px;" />
-</p>
-
 <h1 align="center">Mineocean Home</h1>
 
 <p align="center">
