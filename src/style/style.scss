@@ -1,22 +1,32 @@
-/*
-作者: imsyy
-GitHub：https://github.com/imsyy/home
-版权所有，请勿删除
-*/
-
 @charset "utf-8";
 
-/*全局样式*/
+// ========== CSS 变量 ==========
+:root {
+  --bg-primary: #000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: #111;
+  --border-color: #1f1f1f;
+  --text-primary: #fff;
+  --text-secondary: #888;
+  --text-muted: #555;
+  --accent: #fff;
+  --divider: #222;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --hover-bg: #1a1a1a;
+  --el-message-bg: #1a1a1a;
+  --el-message-text: #ccc;
+  --progress-bg: #1a1a1a;
+  --progress-fill: #555;
+}
 
+// ========== 全局基础 ==========
 html,
 body {
   width: 100%;
   height: 100%;
-  // width: 100dvh;
-  // height: 100dvh;
   margin: 0;
   padding: 0;
-  background-color: #333;
+  background-color: var(--bg-primary);
   overflow: hidden;
   font-family: "LXGW ZhenKai", sans-serif;
 }
@@ -28,28 +38,21 @@ p {
   padding: 0;
   user-select: none;
   text-decoration: none;
-  color: #fff;
+  color: var(--text-primary);
   box-sizing: border-box;
-
-  &:hover {
-    transition: 0.3s;
-  }
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s, opacity 0.3s;
 }
 
-// 链接悬停效果
 a:hover {
-  color: rgb(57, 159, 255);
-  text-decoration: underline;
+  color: var(--text-secondary);
 }
 
-// 字体文件
 @font-face {
   font-family: "LXGW ZhenKai";
   font-display: swap;
   src: url("@fontpkg/lxgw-zhen-kai/LXGWZhenKai.ttf") format("truetype");
 }
 
-// 基础样式
 #app {
   position: fixed;
   top: 0;
@@ -59,92 +62,88 @@ a:hover {
   z-index: 0;
 }
 
-// 卡片样式
+// ========== 卡片 ==========
 .cards {
-  border-radius: 6px;
-  background-color: #00000040;
-  backdrop-filter: blur(10px);
-  transform: scale(1);
-  transition:
-    backdrop-filter 0.3s,
-    transform 0.3s;
-  &:hover {
-    transform: scale(1.01);
-  }
-  &:active {
-    transform: scale(0.98);
-  }
+  border-radius: 10px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
 }
 
-// 文字超出
 .text-hidden {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-// 弹窗样式
+// ========== Element Plus 覆盖 ==========
 .el-message {
-  --el-message-bg-color: #00000040 !important;
-  --el-message-text-color: #efefef !important;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-radius: 25px !important;
-  border-color: transparent !important;
+  --el-message-bg-color: var(--el-message-bg) !important;
+  --el-message-text-color: var(--el-message-text) !important;
+  --el-message-border-color: var(--border-color) !important;
+  border-radius: 8px !important;
 
-  .el-message__badge {
-    display: none;
-  }
-  .el-message__content {
-    white-space: nowrap;
-  }
+  .el-message__badge { display: none; }
+  .el-message__content { white-space: nowrap; }
 }
 
-// 进度条样式
 .el-progress-bar {
   .el-progress-bar__outer {
-    border-radius: 6px;
-    background-color: #00000020;
+    border-radius: 4px;
+    background-color: var(--progress-bg);
     .el-progress-bar__inner {
-      background-color: #efefef;
-      border-radius: 6px;
+      background-color: var(--progress-fill);
+      border-radius: 4px;
       text-align: center;
       font-family: "LXGW ZhenKai";
       span {
-        color: #564d59;
-        font-size: 0.9rem;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
       }
     }
   }
 }
 
-// Tooltip 样式
 .el-popper.is-dark {
-  background: #ffffff60 !important;
-  border: 1px solid transparent !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
 }
 
-// 卡片样式
 .el-card {
   border-radius: 8px !important;
-  border: 1px solid transparent !important;
-  background-color: transparent !important;
+  border: 1px solid var(--border-color) !important;
+  background-color: var(--bg-card) !important;
   .el-card__header {
     font-weight: bold;
     padding: 16px 20px !important;
-    background-color: #ffffff30 !important;
-    border-bottom: 1px solid transparent !important;
+    background-color: var(--bg-secondary) !important;
+    border-bottom: 1px solid var(--border-color) !important;
   }
   .el-card__body {
     padding: 0 !important;
-    background-color: #ffffff10 !important;
+    background-color: var(--bg-card) !important;
   }
 }
 
-// Transition 动画
+.el-collapse {
+  border-color: transparent !important;
+  --el-collapse-header-bg-color: var(--bg-secondary) !important;
+  --el-collapse-content-bg-color: var(--bg-card) !important;
+  .el-collapse-item__header {
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+    font-size: 14px;
+    padding-left: 16px;
+  }
+  .el-collapse-item__wrap {
+    border-color: transparent !important;
+  }
+}
+
+// ========== 过渡动画 ==========
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,
@@ -152,76 +151,37 @@ a:hover {
   opacity: 0;
 }
 
-// keyframes 动画
 @keyframes fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes fade-blur-in {
   from {
-    filter: blur(20px) brightness(0.3);
-    transform: scale(1.6);
+    filter: blur(20px) brightness(0.1);
+    transform: scale(1.4);
   }
   to {
-    filter: blur(0) brightness(1);
+    filter: blur(0) brightness(0.2);
     transform: scale(1);
   }
 }
 
-@keyframes fade-blur-main-in {
-  from {
-    transform: scale(1.2);
-  }
-  to {
-    transform: scale(1);
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
-// 隐藏元素
-@media (min-width: 910px) and (max-width: 1200px) {
-  .sm-hidden {
-    display: none;
-  }
-}
-
-// 自定义鼠标
-#cursor {
-  position: fixed;
-  width: 18px;
-  height: 18px;
-  background: #fff;
-  border-radius: 25px;
-  opacity: 0.25;
-  z-index: 10086;
-  pointer-events: none;
-  transition: 0.2s ease-in-out;
-  transition-property: background, opacity, transform;
-
-  &.hidden {
-    opacity: 0;
-  }
-
-  &.active {
-    opacity: 0.5;
-    transform: scale(0.5);
-  }
-}
-
-// 滚动条样式
+// ========== 滚动条 ==========
 ::-webkit-scrollbar,
 scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb,
 scrollbar-thumb {
-  border-radius: 10px;
-  background-color: #eeeeee;
+  border-radius: 4px;
+  background-color: var(--border-color);
 }

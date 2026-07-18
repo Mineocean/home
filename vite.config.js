@@ -26,12 +26,6 @@ export default ({ mode }) => {
     ...defaultEnv,
     ...loadEnv(mode, process.cwd(), ""),
   };
-  const envDefine = Object.fromEntries(
-    Object.entries(env).map(([key, value]) => [
-      `import.meta.env.${key}`,
-      JSON.stringify(value),
-    ])
-  );
 
   return defineConfig({
     plugins: [
@@ -58,14 +52,14 @@ export default ({ mode }) => {
           clientsClaim: true,
           runtimeCaching: [
             {
-              urlPattern: /(.*?)\.(js|css|woff2|woff|ttf)/, // js / css 静态资源缓存
+              urlPattern: /(.*?)\.(js|css|woff2|woff|ttf)/,
               handler: "CacheFirst",
               options: {
                 cacheName: "js-css-cache",
               },
             },
             {
-              urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
+              urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps|webp)/,
               handler: "CacheFirst",
               options: {
                 cacheName: "image-cache",
@@ -79,50 +73,21 @@ export default ({ mode }) => {
           description: env.VITE_SITE_DES,
           display: "standalone",
           start_url: "/",
-          theme_color: "#424242",
-          background_color: "#424242",
+          theme_color: "#000000",
+          background_color: "#000000",
           icons: [
-            {
-              src: "/images/icon/48.png",
-              sizes: "48x48",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/72.png",
-              sizes: "72x72",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/96.png",
-              sizes: "96x96",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/128.png",
-              sizes: "128x128",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/144.png",
-              sizes: "144x144",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/192.png",
-              sizes: "192x192",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/512.png",
-              sizes: "512x512",
-              type: "image/png",
-            },
+            { src: "/images/icon/48.png", sizes: "48x48", type: "image/png" },
+            { src: "/images/icon/72.png", sizes: "72x72", type: "image/png" },
+            { src: "/images/icon/96.png", sizes: "96x96", type: "image/png" },
+            { src: "/images/icon/128.png", sizes: "128x128", type: "image/png" },
+            { src: "/images/icon/144.png", sizes: "144x144", type: "image/png" },
+            { src: "/images/icon/192.png", sizes: "192x192", type: "image/png" },
+            { src: "/images/icon/512.png", sizes: "512x512", type: "image/png" },
           ],
         },
       }),
       viteCompression(),
     ],
-    define: envDefine,
     server: {
       port: "3000",
       open: true,

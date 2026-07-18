@@ -16,12 +16,13 @@ jobs:
     steps:
       # 检出 Git 仓库
       - name: Check out git repository
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4
       # 安装 Node.js
       - name: Install Node.js
-        uses: actions/setup-node@v4.0.0
+        uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "22.x"
+          cache: "npm"
       # 复制环境变量文件
       - name: Copy .env.example
         run: |

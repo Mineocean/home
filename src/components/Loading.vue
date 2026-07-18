@@ -19,7 +19,6 @@ import { mainStore } from "@/store";
 
 const store = mainStore();
 
-// 配置
 const siteName = import.meta.env.VITE_SITE_NAME;
 </script>
 
@@ -42,39 +41,39 @@ const siteName = import.meta.env.VITE_SITE_NAME;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 2;
     .loader-circle {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      border: 3px solid transparent;
+      border: 2px solid #222;
       border-top-color: #fff;
-      animation: spin 1.8s linear infinite;
-      z-index: 2;
+      animation: spin 1.5s linear infinite;
 
       &:before {
         content: "";
         position: absolute;
-        top: 5px;
-        left: 5px;
-        right: 5px;
-        bottom: 5px;
+        top: 4px;
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
         border-radius: 50%;
-        border: 3px solid transparent;
-        border-top-color: #a4a4a4;
-        animation: spin-reverse 0.6s linear infinite;
+        border: 2px solid transparent;
+        border-top-color: #555;
+        animation: spin-reverse 0.5s linear infinite;
       }
 
       &:after {
         content: "";
         position: absolute;
-        top: 15px;
-        left: 15px;
-        right: 15px;
-        bottom: 15px;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
         border-radius: 50%;
-        border: 3px solid transparent;
-        border-top-color: #d3d3d3;
-        animation: spin 1s linear infinite;
+        border: 2px solid transparent;
+        border-top-color: #888;
+        animation: spin 0.8s linear infinite;
       }
     }
     .loader-text {
@@ -82,13 +81,13 @@ const siteName = import.meta.env.VITE_SITE_NAME;
       flex-direction: column;
       align-items: center;
       color: #fff;
-      z-index: 2;
-      margin-top: 40px;
-      font-size: 24px;
+      margin-top: 36px;
+      font-size: 22px;
       .tip {
         margin-top: 6px;
-        font-size: 18px;
-        opacity: 0.6;
+        font-size: 14px;
+        opacity: 0.4;
+        letter-spacing: 2px;
       }
     }
   }
@@ -97,7 +96,7 @@ const siteName = import.meta.env.VITE_SITE_NAME;
     top: 0;
     width: 51%;
     height: 100%;
-    background: #333;
+    background: #000;
     z-index: 1;
     &.section-left {
       left: 0;
@@ -133,20 +132,12 @@ const siteName = import.meta.env.VITE_SITE_NAME;
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @keyframes spin-reverse {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
 }
 </style>
