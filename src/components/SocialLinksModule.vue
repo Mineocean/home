@@ -4,12 +4,13 @@
       <!-- 社交图标 -->
       <div class="social-icons">
         <a
-          v-for="item in socialLinks"
+          v-for="(item, index) in socialLinks"
           :key="item.name"
           :href="item.url"
           target="_blank"
           :title="item.tip"
           class="social-icon"
+          :style="{ animationDelay: `${index * 60}ms` }"
         >
           <img class="icon-img" :src="item.icon" height="20" />
         </a>
@@ -75,15 +76,23 @@ const siteLinks = computed(() => siteLinksRaw);
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: transform 160ms ease-out;
+      animation: fade 0.5s ease both;
+
+      &:active {
+        transform: scale(0.9);
+        transition: transform 100ms ease-out;
+      }
 
       .icon-img {
         opacity: 0.5;
-        transition: opacity 0.3s, transform 0.3s;
+        transition: opacity 0.3s;
         filter: var(--text-primary-filter, none);
 
-        &:hover {
-          opacity: 0.9;
-          transform: scale(1.12);
+        @media (hover: hover) {
+          &:hover {
+            opacity: 0.9;
+          }
         }
       }
     }
@@ -106,12 +115,18 @@ const siteLinks = computed(() => siteLinksRaw);
     .site-link {
       font-size: 0.88rem;
       color: var(--text-secondary);
-      transition: color 0.3s;
+      transition: color 0.3s, transform 160ms ease-out;
       white-space: nowrap;
 
-      &:hover {
-        color: var(--text-primary);
-        text-decoration: underline;
+      @media (hover: hover) {
+        &:hover {
+          color: var(--text-primary);
+        }
+      }
+
+      &:active {
+        transform: scale(0.97);
+        transition: transform 100ms ease-out;
       }
 
       .dot {

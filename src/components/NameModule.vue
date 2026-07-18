@@ -18,7 +18,9 @@
 
     <!-- 一言 -->
     <div class="hitokoto-line" @click="updateHitokoto">
-      <span class="quote-text">{{ hitokotoData.text }}</span>
+      <Transition name="quote-fade" mode="out-in">
+        <span :key="hitokotoData.text" class="quote-text">{{ hitokotoData.text }}</span>
+      </Transition>
       <span class="quote-from">—— {{ hitokotoData.from }}</span>
     </div>
   </div>
@@ -123,11 +125,8 @@ onBeforeUnmount(() => {
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--border-color);
-    transition: border-color 0.3s, transform 0.3s;
+    transition: border-color 0.3s;
     flex-shrink: 0;
-    &:hover {
-      transform: scale(1.05);
-    }
   }
 
   .divider {
@@ -175,7 +174,6 @@ onBeforeUnmount(() => {
       font-weight: 700;
       letter-spacing: 0.08em;
       color: #fff;
-      animation: float 4s ease-in-out infinite;
     }
 
     .cursor {
@@ -199,10 +197,17 @@ onBeforeUnmount(() => {
     cursor: pointer;
     padding: 4px 8px;
     border-radius: 6px;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 160ms ease-out;
 
-    &:hover {
-      background: var(--hover-bg);
+    @media (hover: hover) {
+      &:hover {
+        background: var(--hover-bg);
+      }
+    }
+
+    &:active {
+      transform: scale(0.97);
+      transition: transform 100ms ease-out;
     }
 
     .quote-text {
@@ -223,5 +228,15 @@ onBeforeUnmount(() => {
 @keyframes blink {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 0; }
+}
+
+.quote-fade-enter-active,
+.quote-fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.quote-fade-enter-from,
+.quote-fade-leave-to {
+  opacity: 0;
 }
 </style>

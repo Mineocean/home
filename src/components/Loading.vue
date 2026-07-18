@@ -75,7 +75,7 @@ const siteName = import.meta.env.VITE_SITE_NAME;
   height: 4px;
   border-radius: 50%;
   background: #555;
-  animation: blink 1.4s ease-in-out infinite;
+  animation: blink 1.4s ease-out infinite;
 
   &:nth-child(2) { animation-delay: 0.2s; }
   &:nth-child(3) { animation-delay: 0.4s; }

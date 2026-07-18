@@ -5,10 +5,11 @@
       v-show="store.imgLoadStatus"
       :src="backgroundUrl"
       class="bg"
+      :class="{ loaded: store.imgLoadStatus }"
       alt="cover"
       @load="imgLoadComplete"
       @error.once="imgLoadError"
-      @animationend="imgAnimationEnd"
+      @transitionend="imgAnimationEnd"
     />
     <div class="overlay" />
   </div>
@@ -102,9 +103,15 @@ onBeforeUnmount(() => clearTimeout(imgTimeout.value));
     object-fit: cover;
     backface-visibility: hidden;
     filter: blur(20px) brightness(0.1);
-    transition: opacity 0.8s ease;
-    animation: fade-blur-in 0.8s ease forwards;
-    animation-delay: 0.45s;
+    transform: scale(1.4);
+    opacity: 0;
+    transition: opacity 0.8s ease, filter 0.8s ease, transform 0.8s ease;
+
+    &.loaded {
+      opacity: 1;
+      filter: blur(0) brightness(0.2);
+      transform: scale(1);
+    }
   }
 
   .overlay {
