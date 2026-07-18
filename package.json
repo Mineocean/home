@@ -7,7 +7,10 @@
   "version": "4.1.5",
   "type": "module",
   "scripts": {
+    "compress": "node scripts/compress-images.mjs",
+    "predev": "npm run compress",
     "dev": "vite --host",
+    "prebuild": "npm run compress",
     "build": "vite build",
     "preview": "vite preview",
     "format": "prettier --write src/",
@@ -30,6 +33,7 @@
     "globals": "^17.0.0",
     "prettier": "^3.8.0",
     "sass": "^1.97.2",
+    "sharp": "^0.35.3",
     "terser": "^5.46.0",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^31.0.0",
