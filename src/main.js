@@ -1,20 +1,23 @@
 import { createApp } from "vue";
-import "@/style/style.scss";
-import App from "@/App.vue";
-// 引入 pinia
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import App from "@/App.vue";
+import "@/style/style.scss";
 
-const app = createApp(App);
-const pinia = createPinia();
-pinia.use(piniaPluginPersistedstate);
+function bootstrap() {
+  const app = createApp(App);
 
-app.use(pinia);
-app.mount("#app");
+  const pinia = createPinia();
+  pinia.use(piniaPluginPersistedstate);
+  app.use(pinia);
 
-// PWA
-navigator.serviceWorker.addEventListener("controllerchange", () => {
-  // 弹出更新提醒
-  console.log("站点已更新，刷新后生效");
-  ElMessage("站点已更新，刷新后生效");
-});
+  app.mount("#app");
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      ElMessage("站点已更新，刷新后生效");
+    });
+  }
+}
+
+bootstrap();

@@ -1,23 +1,20 @@
-// 防抖
-let timeout;
+/**
+ * 防抖函数 - 延迟执行，高频触发时只执行最后一次
+ * @param {Function} fn 目标函数
+ * @param {number} delay 延迟毫秒数，默认 300
+ * @returns {Function} 防抖后的函数
+ */
+export default function debounce(fn, delay = 300) {
+  let timer = null;
 
-function debounce(func, wait = 300, immediate = false) {
-  // 清除定时器
-  if (timeout !== null) {
-    clearTimeout(timeout);
-  }
-  // 立即执行
-  if (immediate) {
-    var callNow = !timeout;
-    timeout = setTimeout(function () {
-      timeout = null;
-    }, wait);
-    if (callNow) typeof func === "function" && func();
-  } else {
-    timeout = setTimeout(function () {
-      typeof func === "function" && func();
-    }, wait);
-  }
+  return function (...args) {
+    if (timer !== null) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+      timer = null;
+    }, delay);
+  };
 }
-
-export default debounce;
