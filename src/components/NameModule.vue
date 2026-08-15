@@ -2,7 +2,7 @@
   <div class="name-module">
     <!-- 头像 + 分割线 + 时钟 -->
     <div class="header-row">
-      <img class="avatar" :src="siteLogo" alt="logo" />
+      <img class="avatar" :src="siteLogo" alt="头像" />
       <div class="divider" />
       <div class="clock-area">
         <div class="clock-date">{{ currentTime.year }}年{{ currentTime.month }}月{{ currentTime.day }}日 {{ currentTime.weekday }}</div>
@@ -16,8 +16,16 @@
       <span class="cursor" :class="{ blink: isTyping }">|</span>
     </div>
 
-    <!-- 一言 -->
-    <div class="hitokoto-line" @click="updateHitokoto">
+    <!-- 一言（div + role=button：button 在部分浏览器无法正确应用 flex 布局，会导致不居中） -->
+    <div
+      class="hitokoto-line"
+      role="button"
+      tabindex="0"
+      aria-label="刷新一言"
+      @click="updateHitokoto"
+      @keydown.enter.prevent="updateHitokoto"
+      @keydown.space.prevent="updateHitokoto"
+    >
       <Transition name="quote-fade" mode="out-in">
         <span :key="hitokotoData.text" class="quote-text">{{ hitokotoData.text }}</span>
       </Transition>
@@ -37,6 +45,7 @@ const siteName = import.meta.env.VITE_SITE_NAME || "清海の主页";
 // 时钟
 const currentTime = ref({});
 let clockTimer;
+let typewriterTimer;
 
 // 打字机效果
 const displayName = ref("");
@@ -44,16 +53,18 @@ const isTyping = ref(true);
 const fullName = siteName;
 
 const typeWriter = () => {
+  clearInterval(typewriterTimer);
   let i = 0;
   displayName.value = "";
   isTyping.value = true;
-  const timer = setInterval(() => {
+  typewriterTimer = setInterval(() => {
     if (i < fullName.length) {
       displayName.value += fullName.charAt(i);
       i++;
     } else {
       isTyping.value = false;
-      clearInterval(timer);
+      clearInterval(typewriterTimer);
+      typewriterTimer = null;
     }
   }, 120);
 };
@@ -98,6 +109,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   clearInterval(clockTimer);
+  clearInterval(typewriterTimer);
+  clearTimeout(debounceTimer);
 });
 </script>
 
@@ -208,6 +221,11 @@ onBeforeUnmount(() => {
     &:active {
       transform: scale(0.97);
       transition: transform 100ms ease-out;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     .quote-text {

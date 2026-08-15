@@ -6,10 +6,10 @@
       </span>
       <span v-if="siteIcp">
         &nbsp;|&nbsp;
-        <a href="https://beian.miit.gov.cn" target="_blank">{{ siteIcp }}</a>
+        <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">{{ siteIcp }}</a>
       </span>
       <span class="made-by">&nbsp;|&nbsp;Made by
-        <a :href="config.github" target="_blank">{{ config.author }}</a>
+        <a :href="config.github" target="_blank" rel="noopener noreferrer">{{ config.author }}</a>
       </span>
     </div>
   </footer>

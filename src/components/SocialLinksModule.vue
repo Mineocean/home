@@ -9,10 +9,12 @@
           :href="item.url"
           target="_blank"
           :title="item.tip"
+          :aria-label="item.tip"
+          rel="noopener noreferrer"
           class="social-icon"
           :style="{ animationDelay: `${index * 60}ms` }"
         >
-          <img class="icon-img" :src="item.icon" height="20" />
+          <img class="icon-img" :src="item.icon" height="20" :alt="item.name" />
         </a>
       </div>
 
@@ -26,6 +28,7 @@
           :key="item.name"
           :href="item.link"
           target="_blank"
+          rel="noopener noreferrer"
           class="site-link"
         >
           {{ item.name }}

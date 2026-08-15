@@ -29,10 +29,6 @@ import config from "@/../package.json";
 
 const store = mainStore();
 
-const getWidth = () => {
-  store.setInnerWidth(window.innerWidth);
-};
-
 const loadComplete = () => {
   nextTick(() => {
     helloInit();
@@ -41,18 +37,6 @@ const loadComplete = () => {
 };
 
 onMounted(() => {
-  document.oncontextmenu = () => {
-    ElMessage({
-      message: "为了浏览体验，本站禁用右键",
-      grouping: true,
-      duration: 2000,
-    });
-    return false;
-  };
-
-  getWidth();
-  window.addEventListener("resize", getWidth);
-
   const styleTitle1 = "font-size: 20px;font-weight: 600;color: rgb(244,167,89);";
   const styleTitle2 = "font-size:12px;color: rgb(244,167,89);";
   const styleContent = "color: rgb(30,152,255);";
@@ -60,10 +44,6 @@ onMounted(() => {
   const title2 = "";
   const content = `\n\n版本: ${config.version}\n主页: ${config.home}\nGithub: ${config.github}`;
   console.info(`%c${title1} %c${title2} %c${content}`, styleTitle1, styleTitle2, styleContent);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener("resize", getWidth);
 });
 </script>
 

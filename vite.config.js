@@ -24,7 +24,7 @@ const defaultEnv = {
 export default ({ mode }) => {
   const env = {
     ...defaultEnv,
-    ...loadEnv(mode, process.cwd(), ""),
+    ...loadEnv(mode, process.cwd(), "VITE_"),
   };
 
   return defineConfig({
@@ -44,6 +44,25 @@ export default ({ mode }) => {
             (acc, [key, value]) => acc.replaceAll(`%${key}%`, value ?? ""),
             html
           ),
+      },
+      {
+        name: "html-csp",
+        apply: "build",
+        transformIndexHtml: (html) => {
+          const csp = [
+            "default-src 'self'",
+            "script-src 'self'",
+            "style-src 'self' 'unsafe-inline'",
+            "img-src 'self' data: blob: https:",
+            "font-src 'self' data:",
+            "connect-src 'self' https://v1.hitokoto.cn",
+            "manifest-src 'self'",
+          ].join("; ");
+          return html.replace(
+            "<head>",
+            `<head>\n    <meta http-equiv="Content-Security-Policy" content="${csp}" />`
+          );
+        },
       },
       VitePWA({
         registerType: "autoUpdate",

@@ -2,8 +2,7 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
-    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    <!-- CSP 由 vite.config.js 的 html-csp 插件在构建时注入（仅生产环境，避免影响 dev HMR） -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="%VITE_SITE_LOGO%" />
     <meta name="description" content="%VITE_SITE_DES%" />
@@ -12,13 +11,6 @@
     <meta name="theme-color" content="#000000" />
     <title>%VITE_SITE_NAME%</title>
     <!-- LXGW ZhenKai -->
-    <!-- IE Out -->
-    <script>
-      if (/*@cc_on!@*/ false || (!!window.MSInputMethodContext && !!document.documentMode))
-        window.location.href =
-          'https://support.dmeng.net/upgrade-your-browser.html?referrer=' +
-          encodeURIComponent(window.location.href);
-    </script>
   </head>
 
   <body>

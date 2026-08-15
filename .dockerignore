@@ -13,3 +13,4 @@ dist
 build
 images
 script
+.env*

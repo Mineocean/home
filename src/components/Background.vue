@@ -8,8 +8,7 @@
       :class="{ loaded: store.imgLoadStatus }"
       alt="cover"
       @load="imgLoadComplete"
-      @error.once="imgLoadError"
-      @transitionend="imgAnimationEnd"
+      @error="imgLoadError"
     />
     <div class="overlay" />
   </div>
@@ -26,8 +25,7 @@ const imgTimeout = ref(null);
 const emit = defineEmits(["loadComplete"]);
 
 const backgroundIndex = Math.floor(Math.random() * 10 + 1);
-const bgKey = `background${backgroundIndex}`;
-const placeholderData = placeholders[bgKey] || "";
+const placeholderData = placeholders[backgroundIndex] || "";
 const isWebP = ref(true);
 
 const setBackgroundUrl = () => {
@@ -42,14 +40,17 @@ const setBackgroundUrl = () => {
 };
 
 const imgLoadComplete = () => {
-  imgTimeout.value = setTimeout(
-    () => store.setImgLoadStatus(true),
-    Math.floor(Math.random() * (600 - 300 + 1)) + 300,
-  );
+  imgTimeout.value = setTimeout(() => {
+    store.setImgLoadStatus(true);
+    emitLoadComplete();
+  }, Math.floor(Math.random() * (600 - 300 + 1)) + 300);
 };
 
-const imgAnimationEnd = () => {
-  console.log("壁纸加载且动画完成");
+let loadCompleteEmitted = false;
+
+const emitLoadComplete = () => {
+  if (loadCompleteEmitted) return;
+  loadCompleteEmitted = true;
   emit("loadComplete");
 };
 
@@ -62,9 +63,11 @@ const imgLoadError = () => {
   }
   console.error("壁纸加载失败：", backgroundUrl.value);
   ElMessage({
-    message: "壁纸加载失败",
+    message: "壁纸加载失败，已使用纯色背景",
     icon: h(Error, { theme: "filled", fill: "#888" }),
   });
+  store.setImgLoadStatus(true);
+  emitLoadComplete();
 };
 
 onMounted(() => setBackgroundUrl());

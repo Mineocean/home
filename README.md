@@ -7,7 +7,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Vue-3.5-4fc08d?style=flat-square&logo=vue.js&logoColor=fff" alt="Vue" />
   <img src="https://img.shields.io/badge/Vite-7.3-646cff?style=flat-square&logo=vite&logoColor=fff" alt="Vite" />
-  <img src="https://img.shields.io/badge/Element Plus-2.14-409eff?style=flat-square&logo=element&logoColor=fff" alt="Element Plus" />
+  <img src="https://img.shields.io/badge/Element Plus-2.13.1-409eff?style=flat-square&logo=element&logoColor=fff" alt="Element Plus" />
   <img src="https://img.shields.io/badge/PWA-Enabled-5a0fc8?style=flat-square&logo=pwa&logoColor=fff" alt="PWA" />
   <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License" />
 </p>
@@ -105,7 +105,7 @@ VITE_SITE_ICP      = ""                        # ICP 备案号
 ### 背景壁纸
 
 - 壁纸放置于 `public/images/`，命名为 `background1.jpg` ~ `background10.jpg`
-- WebP 版本由 `scripts/convert-images.mjs` 自动生成
+- WebP 版本由 `scripts/compress-images.mjs` 自动生成
 - 站点图标放置于 `public/images/icon/`
 
 ### 字体
@@ -152,7 +152,7 @@ docker-compose up -d
 src/
 ├── api/index.js              # Hitokoto 一言 API
 ├── App.vue                   # 主布局（垂直居中）
-├── assets/                   # siteLinks.json, socialLinks.json
+├── assets/                   # placeholders.json, siteLinks.json, socialLinks.json
 ├── components/
 │   ├── Background.vue        # 壁纸渐进式加载
 │   ├── Footer.vue            # 脚注
