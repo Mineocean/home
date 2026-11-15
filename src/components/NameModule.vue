@@ -39,7 +39,7 @@ import { Error } from "@icon-park/vue-next";
 import { getHitokoto } from "@/api";
 import { getCurrentTime } from "@/utils/getTime";
 
-const siteLogo = import.meta.env.VITE_SITE_MAIN_LOGO;
+const siteLogo = import.meta.env.VITE_SITE_MAIN_LOGO || "/images/icon/logo.png";
 const siteName = import.meta.env.VITE_SITE_NAME || "清海の主页";
 
 // 时钟

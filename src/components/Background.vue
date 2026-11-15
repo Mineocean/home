@@ -25,7 +25,8 @@ const imgTimeout = ref(null);
 const emit = defineEmits(["loadComplete"]);
 
 const backgroundIndex = Math.floor(Math.random() * 10 + 1);
-const placeholderData = placeholders[backgroundIndex] || "";
+const placeholderData = placeholders[backgroundIndex];
+const placeholderImage = placeholderData ? `url("${placeholderData}")` : "none";
 const isWebP = ref(true);
 
 const setBackgroundUrl = () => {
@@ -92,7 +93,7 @@ onBeforeUnmount(() => clearTimeout(imgTimeout.value));
     height: 100%;
     background-size: cover;
     background-position: center;
-    background-image: v-bind("placeholderData ? `url('${placeholderData}')` : 'none'");
+    background-image: v-bind(placeholderImage);
     filter: blur(40px) brightness(0.1);
     transform: scale(1.2);
   }

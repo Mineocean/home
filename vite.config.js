@@ -6,7 +6,6 @@ import { VitePWA } from "vite-plugin-pwa";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import viteCompression from "vite-plugin-compression";
 
 const defaultEnv = {
   VITE_SITE_NAME: "清海の主页",
@@ -15,7 +14,6 @@ const defaultEnv = {
   VITE_SITE_DES: "一个默默无闻的主页",
   VITE_SITE_URL: "misakaoi.top",
   VITE_SITE_LOGO: "/images/icon/favicon.ico",
-  VITE_SITE_MAIN_LOGO: "/images/icon/logo.png",
   VITE_SITE_START: "2020-10-24",
   VITE_SITE_ICP: "豫ICP备2022018134号-1",
 };
@@ -39,11 +37,14 @@ export default ({ mode }) => {
       }),
       {
         name: "html-env-defaults",
-        transformIndexHtml: (html) =>
-          Object.entries(env).reduce(
-            (acc, [key, value]) => acc.replaceAll(`%${key}%`, value ?? ""),
-            html
-          ),
+        transformIndexHtml: {
+          order: "pre",
+          handler: (html) =>
+            Object.entries(env).reduce(
+              (acc, [key, value]) => acc.replaceAll(`%${key}%`, value ?? ""),
+              html
+            ),
+        },
       },
       {
         name: "html-csp",
@@ -105,7 +106,6 @@ export default ({ mode }) => {
           ],
         },
       }),
-      viteCompression(),
     ],
     server: {
       port: "3000",
@@ -115,7 +115,7 @@ export default ({ mode }) => {
       alias: [
         {
           find: "@",
-          replacement: resolve(__dirname, "src"),
+          replacement: resolve(import.meta.dirname, "src"),
         },
       ],
     },
