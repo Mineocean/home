@@ -2,7 +2,7 @@
 import { defineConfig, loadEnv } from "vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { resolve } from "path";
-import { VitePWA } from "vite-plugin-pwa";
+import { VitePWA } from "@unplugin-pwa/vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
@@ -15,7 +15,6 @@ const defaultEnv = {
   VITE_SITE_URL: "misakaoi.top",
   VITE_SITE_LOGO: "/images/icon/favicon.ico",
   VITE_SITE_START: "2020-10-24",
-  VITE_SITE_ICP: "豫ICP备2022018134号-1",
 };
 
 // https://vitejs.dev/config/
@@ -67,7 +66,7 @@ export default ({ mode }) => {
       },
       VitePWA({
         registerType: "autoUpdate",
-        workbox: {
+        generateSW: {
           skipWaiting: true,
           clientsClaim: true,
           runtimeCaching: [
