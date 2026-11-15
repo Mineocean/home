@@ -20,7 +20,7 @@ import config from "@/../package.json";
 
 const fullYear = new Date().getFullYear();
 const siteIcp = ref(import.meta.env.VITE_SITE_ICP);
-const siteAuthor = ref(import.meta.env.VITE_SITE_AUTHOR);
+const siteAuthor = import.meta.env.VITE_SITE_AUTHOR?.trim() || "清海";
 </script>
 
 <style lang="scss" scoped>
