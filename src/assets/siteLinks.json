@@ -13,5 +13,10 @@
     "icon": "Compass",
     "name": "起始页",
     "link": "https://misakaoi.top/"
+  },
+  {
+    "icon": "Tool",
+    "name": "工具箱",
+    "link": "https://tools.misakaoi.top/"
   }
 ]
